@@ -39,6 +39,7 @@ import (
 	"github.com/prometheus/common/route"
 
 	"github.com/prometheus/prometheus/config"
+	newremote "github.com/prometheus/prometheus/contrib/remote"
 	"github.com/prometheus/prometheus/model/exemplar"
 	"github.com/prometheus/prometheus/model/labels"
 	"github.com/prometheus/prometheus/model/textparse"
@@ -267,7 +268,7 @@ func NewAPI(
 	}
 
 	if ap != nil {
-		a.remoteWriteHandler = remote.NewWriteHandler(logger, ap)
+		a.remoteWriteHandler = newremote.NewWriteHandler(logger, ap)
 	}
 
 	return a
