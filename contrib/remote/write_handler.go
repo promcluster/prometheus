@@ -117,6 +117,8 @@ func (h *writeHandler) appendTSDB(s []sortableSample) {
 	var err error
 	sort.Sort(sortableSamples(s))
 	app := h.appendable.Appender(context.Background())
+	defer app.Commit()
+	
 	for _, sample := range s {
 		samplesCount++
 		_, err = app.Append(0, sample.Labels, sample.Timestamp, sample.Value)
